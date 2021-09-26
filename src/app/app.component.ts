@@ -1,10 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Drawable } from 'src/models/shapes/Drawable'
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Player } from 'src/models/Player'
-import { Enemy } from 'src/models/Enemy'
-import { Observable } from 'rxjs';
-import { fromEvent } from 'rxjs'
 import { IRenderer } from 'src/models/IRenderer';
+import { Settings } from 'src/models/Settings';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +25,14 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.context = this.map.nativeElement.getContext('2d');
 
-    this.map.nativeElement.width = window.innerWidth;
-    this.map.nativeElement.height = window.innerHeight;
+    Settings.mapSize = { width: window.innerWidth, height: window.innerHeight}
+
+    this.map.nativeElement.width = Settings.mapSize.width;
+    this.map.nativeElement.height = Settings.mapSize.height;
 
     setInterval(() => {
       this.draw()
     }, 1)
-
   }
 
   draw() {
@@ -47,5 +45,4 @@ export class AppComponent implements AfterViewInit {
     //render objects again
     this.objects.forEach(object => object.render(this.context))
   }
-
 }

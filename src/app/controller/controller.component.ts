@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { Player } from 'src/models/Player';
+import { Settings } from 'src/models/Settings';
 
 @Component({
   selector: 'app-controller',
@@ -9,17 +10,17 @@ import { Player } from 'src/models/Player';
 })
 export class ControllerComponent implements OnInit {
 
-  private mouseCoords: { x: number, y: number } = { x: 0, y: 0 }
   @Input() player: Player
 
   constructor() {
     fromEvent(document.body, 'mousemove').subscribe((e: MouseEvent) => {
-      this.mouseCoords = { x: e.pageX, y: e.pageY }
-      this.player.aim(this.mouseCoords)
+      Settings.mousePosition = { y: e.pageY, x: e.pageX }
     })
-
     fromEvent(document.body, 'mousedown').subscribe((e: MouseEvent) => {
-      this.player.shoot()
+      Settings.mouseDown = true
+    })
+    fromEvent(document.body, 'mouseup').subscribe((e: MouseEvent) => {
+      Settings.mouseDown = false
     })
   }
 

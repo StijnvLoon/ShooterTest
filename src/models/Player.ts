@@ -4,6 +4,7 @@ import { Composition } from "./shapes/Composition";
 import { IRenderer } from "./IRenderer";
 import { Helper } from "./Helper";
 import { Bullet } from "./Bullet";
+import { Settings } from "./Settings";
 
 export class Player extends Composition implements IRenderer {
 
@@ -79,7 +80,12 @@ export class Player extends Composition implements IRenderer {
             this.line.getPosition().x,
             this.line.getVelocity().vY,
             this.line.getVelocity().vX,
-            this.line.getRotation()
+            this.line.getRotation(),
+            () => {
+                const index = this.drawables.indexOf(bullet)
+                this.drawables.splice(index, 1)
+                console.log(this.drawables.length)
+            }
         )
 
         this.drawables.push(bullet)
@@ -93,5 +99,11 @@ export class Player extends Composition implements IRenderer {
                 drawable.adjustPosition(this.velocityY, this.velocityX)
             }
         })
+
+        this.aim(Settings.mousePosition)
+
+        if(Settings.mouseDown) {
+            this.shoot()
+        }
     }
 }
