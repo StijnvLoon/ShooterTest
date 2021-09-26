@@ -77,8 +77,8 @@ export class Player extends Composition implements IRenderer {
         const bullet: Bullet = new Bullet(
             this.line.getPosition().y,
             this.line.getPosition().x,
-            this.velocityY,
-            this.velocityX,
+            this.line.getVelocity().vY,
+            this.line.getVelocity().vX,
             this.line.getRotation()
         )
 

@@ -3,6 +3,10 @@ import { IRenderer } from './IRenderer'
 
 export class Bullet extends Line implements IRenderer {
 
+    private readonly speed: number = 2
+    private velocityY: number = 0
+    private velocityX: number = 0
+
     constructor(
         y: number,
         x: number,
@@ -10,12 +14,14 @@ export class Bullet extends Line implements IRenderer {
         vX: number,
         rotation: number
     ) {
-        super(y, x, 20, 0, 5, 'red')
+        super(y, x, vY, vX, 5, 'red')
         this.rotation = rotation
+
+        this.velocityY = Math.sin((this.rotation - 90) * Math.PI / 180) * this.speed
+        this.velocityX = Math.cos((this.rotation - 90) * Math.PI / 180) * this.speed
     }
 
     update(): void {
-        // this.adjustPosition(0.01, 0.01)
-        // console.log(this.getPosition())
+        this.adjustPosition(this.velocityY, this.velocityX)
     }
 }

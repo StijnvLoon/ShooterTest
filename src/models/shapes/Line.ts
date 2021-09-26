@@ -14,6 +14,10 @@ export class Line extends Drawable {
         super(y, x, 0, 0, color);
     }
 
+    public getVelocity(): { vY: number, vX: number } {
+        return { vY: this.vY, vX: this.vX }
+    }
+
     public render(context: CanvasRenderingContext2D) {
         context.beginPath()
         const fromCoords = { x: this.x, y: this.y }
