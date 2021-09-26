@@ -17,6 +17,10 @@ export class ControllerComponent implements OnInit {
       this.mouseCoords = { x: e.pageX, y: e.pageY }
       this.player.aim(this.mouseCoords)
     })
+
+    fromEvent(document.body, 'mousedown').subscribe((e: MouseEvent) => {
+      this.player.shoot()
+    })
   }
 
   ngOnInit(): void {

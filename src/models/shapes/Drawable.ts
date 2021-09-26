@@ -20,6 +20,10 @@ export abstract class Drawable {
         this.rotation = degrees
     }
 
+    public getRotation(): number {
+        return this.rotation
+    }
+
     public adjustPosition(vY: number, vX: number) {
         this.y += vY
         this.x += vX

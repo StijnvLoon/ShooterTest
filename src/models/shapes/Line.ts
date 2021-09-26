@@ -19,9 +19,9 @@ export class Line extends Drawable {
         const fromCoords = { x: this.x, y: this.y }
         const toCoords = { x: this.x + this.vX, y: this.y + this.vY }
 
-        context.translate(toCoords.x, toCoords.y);
+        context.translate(fromCoords.x, fromCoords.y);
         context.rotate(Helper.degreesToRadius(this.rotation));
-        context.translate(-toCoords.x, -toCoords.y);
+        context.translate(-fromCoords.x, -fromCoords.y);
 
         context.moveTo(fromCoords.x, fromCoords.y)
         context.lineTo(toCoords.x, toCoords.y)
